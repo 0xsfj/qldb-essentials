@@ -13,15 +13,24 @@ const QuantumClient = new qldb({
   ledger:qldb_config.LEDGER_NAME
 });
 
-app.get('/api/readAll/', async function (req, res) {
-    
+console.log(QuantumClient)
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+
+app.get('/api/all/', async function (req, res) {
+    console.log(`Query All`)
 try{
-  const response = await QuantumClient.execute('SELECT * FROM Movies');
+  const response = await QuantumClient.execute('SELECT * FROM Person');
   res.send(response)
 }catch (err) {
     res.status(500).send(err)
   }    
 })
+
+
 app.get('/api/search/', async function (req, res) {
     
 try{
